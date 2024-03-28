@@ -20,6 +20,9 @@ $koneksi_ke_db = mysqli_connect($nama_host, $usernamame, $password, $nama_databa
 // var_dump($buah->tanda_matang);
 
 
+
+
+
 function ambil_tabel($q) {
   global $koneksi_ke_db;
   // mengambil tabel buah-buahan dari database belajar_php_mysql
@@ -33,15 +36,21 @@ function ambil_tabel($q) {
   return $rows; // kembalikan array buah-ubahan yang baru
 }
 
-function tambah2($var) {
+function tambah($var) {
   global $koneksi_ke_db;
   $nama = htmlspecialchars($var["nama"]);
-  $gambar = htmlspecialchars($var["gambar"]);
   $rasa = htmlspecialchars($var["rasa"]);
   $asal_negara = htmlspecialchars($var["asal_negara"]);
   $tanda_matang = htmlspecialchars($var["tanda_matang"]);
   $kebebasan_makan = htmlspecialchars($var["kebebasan_makan"]);
   $ditemukan_pada = htmlspecialchars($var["ditemukan_pada"]);
+
+
+  $gambar = upload();
+  if(!$gambar) {
+    return false;
+  }
+
 
   $que = "INSERT INTO buah_buahan
            VALUES 
@@ -50,7 +59,6 @@ function tambah2($var) {
           ";
   // simpan data ke tabel 
   mysqli_query($koneksi_ke_db, $que);
-
   return mysqli_affected_rows($koneksi_ke_db);
 }
 
@@ -66,12 +74,20 @@ function ubah($v) {
   $id = $v["id"];
 
   $nama = htmlspecialchars($v["nama"]);
-  $gambar = htmlspecialchars($v["gambar"]);
   $rasa = htmlspecialchars($v["rasa"]);
   $asal_negara = htmlspecialchars($v["asal_negara"]);
   $tanda_matang = htmlspecialchars($v["tanda_matang"]);
   $kebebasan_makan = htmlspecialchars($v["kebebasan_makan"]);
   $ditemukan_pada = htmlspecialchars($v["ditemukan_pada"]);
+  
+  if($_FILES["gambar"]["error"] === 4) {
+    $gambar = $v["gambar_lama"];
+  } else {
+    $gambar = upload();
+  }
+
+
+ 
 
   $que = "UPDATE buah_buahan SET 
             nama = '$nama',
@@ -85,6 +101,8 @@ function ubah($v) {
           ";
   // simpan data ke tabel 
   mysqli_query($koneksi_ke_db, $que);
+
+  echo mysqli_affected_rows($koneksi_ke_db);
   return mysqli_affected_rows($koneksi_ke_db);
 }
 
@@ -101,5 +119,46 @@ function cari($keyword) {
 }
 
 
+function upload() {
+  $namaFile = $_FILES["gambar"]["name"];
+  $ukuranGambar = $_FILES["gambar"]["size"];
+  $penyimpananSementara = $_FILES["gambar"]["tmp_name"];
+  $error = $_FILES["gambar"]["error"];
+  
+  // cek apakah ada file yang akan di upload?
+  if($error === 4) {
+    alertt("gambar wajib di isi!", 'tambah1.php');
+  }
+
+  // cek apakah yang di upload adalah gambar?
+  $ektensiGambarValid = ["jpg", "jpeg", "png"];
+  $strEktensiGambar = explode(".", $namaFile);
+  $ektensiGambar = strtolower(end($strEktensiGambar));
+  if(!in_array($ektensiGambar, $ektensiGambarValid)) {
+    alertt("yang anda upload bukan gambar!!", 'tambah1.php');
+    return false;
+  }
+  
+  // mengecek ukuran gambar
+  if($ukuranGambar > 1000000) {
+    alertt("ukuran gambar jangan lebih dari 1 MB", 'tambah1.php');
+    return false;
+  }
+  
+  // lolos pengecekan, upload file ke servenamaFiler
+  // buat nama baru sebelum upload
+  $namaFileBaru = uniqid();
+  $namaFileUpload = '../img/' . $namaFileBaru . '.'. $ektensiGambar;
+
+  move_uploaded_file($penyimpananSementara, $namaFileUpload);
+  return $namaFileUpload;
+}
 
 ?>
+
+<?php function alertt($pesan, $lokasi) { ?>
+      <script>
+        alert('data berhasil di diubah')
+        document.location.href = 'index.php'
+      </script>
+<?php } ?>

@@ -38,19 +38,18 @@ if (isset($_POST["cari"])) {
 
 <body>
   <h1 style="text-transform: capitalize;">daftar buah-buahan </h1>
-  <a href="tambah.php">tambah data</a>
+  <a href="tambah1.php">tambah data</a>
   <br><br>
   <form action="" method="post">
     <input style="align-items: center;" type="search" name="keyword" autofocus autocomplete="off" placeholder="masukan keyword pencarian..." size="40">
     <button type="submit" name="cari">Cari</button>
   </form>
 
-
   <table cellspacing="0" cellpadding="5">
     <tr>
       <th>no</th>
-      <th>nama</th>
       <th>gambar</th>
+      <th>nama</th>
       <th>rasa</th>
       <th>asal negara</th>
       <th>tanda matang</th>
@@ -65,14 +64,13 @@ if (isset($_POST["cari"])) {
       ?>
         <tr>
           <td><?= $i++; ?></td>
-          <td><?= $buah["nama"]; ?></td>
           <td><img src="<?= $buah["gambar"]; ?>" width="50px" alt="gambar buah"></td>
+          <td><?= $buah["nama"]; ?></td>
           <td><?= $buah["rasa"]; ?></td>
           <td><?= $buah["asal_negara"]; ?></td>
           <td><?= $buah["tanda_matang"]; ?></td>
           <td><?= $buah["kebebasan_makan"]; ?></td>
           <td><?= $buah["ditemukan_pada"]; ?></td>
-
           <td><a href="hapus.php?id=<?= $buah["id"]; ?>" onclick="return confirm('apakah yakin menghapus?')">hapus</a> || <a href="ubah.php?id=<?= $buah["id"] ?>">ubah</a></td>
         </tr>
       <?php endforeach; ?>
