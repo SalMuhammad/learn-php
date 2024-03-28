@@ -3,19 +3,10 @@ require 'functions.php';
 
 if(isset($_POST["submit"])) {   
   if(tambah_data($_POST) > 0) {
-    echo "data di simpan";?>
-      <script>
-        alert('data berhasil di tambahkan')
-        document.location.href = 'index.php'
-        console.log('jangan') 
-      </script>
-  <?php } else { ?>
-      <script>
-        alert('data gagal di tambahkan')
-        window.location.href = 'index.php'
-      </script>
-<?php
-  }    
+    alertt("data berhasil di simpan", "index.php");
+  } else {
+    alertt("data gagal di simpan", "index.php");
+  }
 }
 
 ?>

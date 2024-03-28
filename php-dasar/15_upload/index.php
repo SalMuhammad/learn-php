@@ -18,22 +18,7 @@ if (isset($_POST["cari"])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>halaman index</title>
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-
-    th,
-    td {
-      border-bottom: 1px solid;
-      /* border-left: 1px solid; */
-      text-transform: capitalize;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-  </style>
+  <link rel="stylesheet" href="../../style/style.css">
 </head>
 
 <body>
@@ -45,7 +30,7 @@ if (isset($_POST["cari"])) {
     <button type="submit" name="cari">Cari</button>
   </form>
 
-  <table cellspacing="0" cellpadding="5">
+  <table cellspacing="0" cellpadding="2">
     <tr>
       <th>no</th>
       <th>gambar</th>
@@ -64,14 +49,14 @@ if (isset($_POST["cari"])) {
       ?>
         <tr>
           <td><?= $i++; ?></td>
-          <td><img src="<?= $buah["gambar"]; ?>" width="50px" alt="gambar buah"></td>
+          <td><img src="<?= $buah["gambar"]; ?>" height="50px" alt="gambar buah"></td>
           <td><?= $buah["nama"]; ?></td>
           <td><?= $buah["rasa"]; ?></td>
           <td><?= $buah["asal_negara"]; ?></td>
           <td><?= $buah["tanda_matang"]; ?></td>
           <td><?= $buah["kebebasan_makan"]; ?></td>
           <td><?= $buah["ditemukan_pada"]; ?></td>
-          <td><a href="hapus.php?id=<?= $buah["id"]; ?>" onclick="return confirm('apakah yakin menghapus?')">hapus</a> || <a href="ubah.php?id=<?= $buah["id"] ?>">ubah</a></td>
+          <td><a href="hapus.php?id=<?= $buah["id"]; ?>&gambar=<?= $buah["gambar"];?>" onclick="return confirm('apakah yakin menghapus?')">hapus</a> || <a href="ubah.php?id=<?= $buah["id"] ?>">ubah</a></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

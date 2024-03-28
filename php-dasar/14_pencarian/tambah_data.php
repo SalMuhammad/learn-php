@@ -48,10 +48,11 @@ if(isset($_POST["submit"])) {
       <li><input type="text" placeholder="asal negara" name="asal_negara"></li>
       <li><input type="text" placeholder="tanda matang" name="tanda_matang"></li>
       <li><input type="text" placeholder="kebebasan makan" name="kebebasan_makan"></li>
-      <li><input type="text" placeholder="di temukan pada" name="di_temukan_pada"></li>
+      <li><input type="text" placeholder="di temukan pada" name="ditemukan_pada"></li>
     </ul>
 
     <button type="submit" name="submit">simpan</button>
   </form>
 </body>
 </html>
+

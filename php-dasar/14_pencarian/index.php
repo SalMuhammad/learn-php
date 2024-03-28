@@ -38,7 +38,7 @@ if (isset($_POST["cari"])) {
 
 <body>
   <h1 style="text-transform: capitalize;">daftar buah-buahan </h1>
-  <a href="tambah_data.php">tambah data</a>
+  <a href="tambah_data2.php">tambah data</a>
   <br><br>
   <form action="" method="post">
     <input style="align-items: center;" type="search" name="keyword" autofocus autocomplete="off" placeholder="masukan keyword pencarian..." size="40">

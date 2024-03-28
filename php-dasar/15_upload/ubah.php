@@ -5,15 +5,25 @@ $id = $_GET["id"];
 
 $buah_ = ambil_tabel("SELECT * FROM buah_buahan WHERE id = $id")[0];
 
-if(isset($_POST["submit"])) {   
+if(isset($_POST["submit"])) {  
   if(ubah($_POST) > 0) {
-    var_dump($_POST);
-    // alertt("data berhasi di rubah", "index.php");
-   } else { 
-      
-    alertt("data gagal di ubah", "index.php");
-  }    
-}
+    echo "  
+    <script>
+      alert('data telah di rubah')
+      // document.location.href = 'index.php'
+    </script>
+    ";
+      alertt("data berhasi di rubah", "index.php");
+    } else {
+      echo "
+      <script>
+      alert('data belum di rubah')
+      // document.location.href = 'index.php'
+      </script>
+      ";
+      alertt("data gagal di rubah", "index.php");
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -39,12 +49,14 @@ if(isset($_POST["submit"])) {
       <li><input type="text" placeholder="di temukan pada" name="ditemukan_pada" value="<?= $buah_['ditemukan_pada'] ?>"></li>
       
       <li>
-        <input type="file" placeholder="ling gambar" name="gambar" cols="50" rows="5" value="<?= $buah_['gambar'] ?>" /> <br>
-        <img src="<?= $buah_["gambar"]?>" alt="gambar" width="100px">
+        <input type="file" accept="image/*" onchange="loadFile(event)" placeholder="ling gambar" name="gambar" value="<?= $buah_['gambar'] ?>" /> <br>
+        <img id="img" src="<?= $buah_["gambar"]?>" alt="gambar" width="100px">
       </li>
     </ul>
 
     <button type="submit" name="submit">simpan</button>
   </form>
+
+  <script src="../../js/script.js"></script>
 </body>
 </html>
