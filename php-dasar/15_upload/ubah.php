@@ -10,10 +10,10 @@ if(isset($_POST["submit"])) {
     echo "  
     <script>
       alert('data telah di rubah')
-      // document.location.href = 'index.php'
+      document.location.href = 'index.php'
     </script>
     ";
-      alertt("data berhasi di rubah", "index.php");
+      // alertt("data berhasi di rubah", "index.php");
     } else {
       echo "
       <script>
@@ -21,7 +21,7 @@ if(isset($_POST["submit"])) {
       // document.location.href = 'index.php'
       </script>
       ";
-      alertt("data gagal di rubah", "index.php");
+      // alertt("data gagal di rubah", "index.php");
     }
   }
 ?>

@@ -79,7 +79,7 @@ function ubah($v) {
     // hapu gambar lama
     unlink($v["gambar_lama"]);
     // unggah gambar baru
-    $gambar = upload();
+    $gambar = upload("ubah.php");
     }
 
   // simpan data baru ke ke database
@@ -94,7 +94,7 @@ function ubah($v) {
                                   WHERE id = '$id' 
                                 ");
   
- mysqli_affected_rows($koneksi_ke_db);
+  mysqli_affected_rows($koneksi_ke_db);
   return mysqli_affected_rows($koneksi_ke_db);
 }
 
@@ -107,7 +107,7 @@ function hapus($id, $gambar) {
   return mysqli_affected_rows($koneksi_ke_db);
 }
 
-function upload() {
+function upload($lokasi_kembali) {
   $namaFile = $_FILES["gambar"]["name"];
   $ukuranGambar = $_FILES["gambar"]["size"];
   $penyimpananSementara = $_FILES["gambar"]["tmp_name"];
@@ -130,13 +130,12 @@ function upload() {
   $ektensiGambarValid = ["jpg", "jpeg", "png"];
   $strEktensiGambar = explode(".", $namaFile);
   $ektensiGambar = strtolower(end($strEktensiGambar));
-  if(!in_array($ektensiGambar, $ektensiGambarValid)) {
-    echo "  
+  if(!in_array($ektensiGambar, $ektensiGambarValid)) { ?>
     <script>
       alert('yang anda upload bukan gambar')
-      document.location.href = 'hapus.php'
+      document.location.href = <?= $lokasi_kembali; ?>
     </script>
-    ";
+    <?php 
     // alertt("yang anda upload bukan gambar!!", "tambah1.php");
     return false;
   }
