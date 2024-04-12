@@ -183,17 +183,37 @@ function cari($keyword) {
 // fungsi registrasi
 function registrasi($data) {
   global $koneksi_ke_db;
+  $username = strtolower(stripslashes($data["username"]));
+  $password = mysqli_real_escape_string($koneksi_ke_db, $data["password"]);
+  $password2 = mysqli_real_escape_string($koneksi_ke_db, $data["password2"]);
 
-  $username = strtolower(stripslashes($data["username"]))
-  $password = mysqli_real_escape_string($data["password"])
-  $password2 = mysqli_real_escape_string($data["password2"])
+
+  
+  // cek apakah username sudah ada di database?
+  $d = mysqli_query($koneksi_ke_db, "SELECT username FROM users WHERE username = '$username'");
+  if(mysqli_fetch_assoc($d)) {
+    echo "<script>
+            alert('Username sudah terdaftar')
+          </script>";
+    return false;
+  }
 
   // cek konfirmasi password
   if($password !== $password2) {
-    
+    echo "<script>
+            alert('konfirmasi password berbeda!!')
+            window.history.back();
+          </script>";
+    return false;
   }
-}
 
+  // enkripsi password 
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  // simpan data ke database
+  mysqli_query($koneksi_ke_db, "INSERT INTO users VALUES('', '$username', '$password')");
+  return mysqli_affected_rows($koneksi_ke_db);
+}
 
 ?>
 

@@ -40,7 +40,7 @@ if(isset($_POST["register"])) {
       </li>
       <li>
         <label for="password2">Konfirmasi Password</label>
-        <input type="password2" id="password2" name="password2">
+        <input type="password" id="password2" name="password2">
       </li>
     </ul>
     <button type="submit" name="register">buatkan akun</button>
