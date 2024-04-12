@@ -1,10 +1,10 @@
 <?php 
 // konek ke data base;
 $nama_host = "localhost";
-$usernamame = "root";
+$username = "root";
 $password = "";
 $nama_database = "belajar_php_mysql";
-$koneksi_ke_db = mysqli_connect($nama_host, $usernamame, $password, $nama_database);
+$koneksi_ke_db = mysqli_connect($nama_host, $username, $password, $nama_database);
 
 // ambil data buah-buan dari database (belajar_php_mysql)
 // mysqli_fetch_row(); mengembalikan array numerik
@@ -177,6 +177,23 @@ function cari($keyword) {
                         ditemukan_pada LIKE '%$keyword%'
                     ");
 }
+
+
+
+// fungsi registrasi
+function registrasi($data) {
+  global $koneksi_ke_db;
+
+  $username = strtolower(stripslashes($data["username"]))
+  $password = mysqli_real_escape_string($data["password"])
+  $password2 = mysqli_real_escape_string($data["password2"])
+
+  // cek konfirmasi password
+  if($password !== $password2) {
+    
+  }
+}
+
 
 ?>
 

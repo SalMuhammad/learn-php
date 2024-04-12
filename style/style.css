@@ -8,6 +8,7 @@ td {
   border-bottom: 1px solid;
   /* border-left: 1px solid; */
   text-transform: capitalize;
+  border-right: 1px solid gray ;
 }
 
 tr:last-child td {
