@@ -9,4 +9,5 @@ if(hapus($id, $gambar) > 0) { ?>
       </script>
     <?php 
 }
+
 ?>
