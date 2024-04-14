@@ -15,8 +15,8 @@ if(isset($_POST["submit"])) {
   if(ubah($_POST) > 0) {
     echo "
     <script>
-      alert('data telah di rubah');
-      document.location.href = 'index.php';
+      alert('data telah di rubah')
+      document.location.href = 'index.php'
     </script>
     ";
       // alertt("data berhasi di rubah", "index.php");
