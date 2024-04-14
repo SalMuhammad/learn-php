@@ -2,10 +2,24 @@
 require 'functions.php';
 session_start();
 
-// cek session login
-if(isset($_COOKIE['login'])) {
-  if($_COOKIE['login'] === 'true') {
-    // echo 'ada';
+// // cek session login
+// if(isset($_COOKIE['login'])) {
+//   if($_COOKIE['login'] === 'true') {
+//     // echo 'ada';
+//     $_SESSION['login'] = true;
+//   }
+// }
+
+// cek cookie id dan fr_aria
+if(isset($_COOKIE['id']) && isset($_COOKIE['fr_aria'])) {
+  $id = $_COOKIE['id'];
+  $fr_aria = $_COOKIE['fr_aria'];
+  // cari username berdasarkan id dari cookie
+  $hasil = mysqli_query($koneksi_ke_db, "SELECT username FROM users WHERE '$id'");
+  $ngaran = mysqli_fetch_assoc($hasil);
+
+  // cek id dan fr_aria di database dengan yang berada di cookie
+  if($fr_aria === hash('sha256', $ngaran['username'])){
     $_SESSION['login'] = true;
   }
 }
@@ -40,7 +54,8 @@ if(isset($_POST["login"])) {
         if(password_verify($pass, $rows["password"])) {
           // cek apakah remember di centang?
           if(isset($_POST["remember"])) {
-            setcookie('login', 'true', time()+120);
+            setcookie('id', $rows['id'], time() + 31622400);
+            setcookie('fr_aria', hash('sha256', $rows['username']),time() + 31622400);
           }
           $_SESSION["login"] = true;
           header('Location: index.php');
@@ -84,7 +99,8 @@ if(isset($_POST["login"])) {
         </label>
       </li>
       <li>
-        <input type="checkbox" name="remember" id="remember"><label  style="display: inline-block;" for="" id="remember">ingat saya</label></li>
+        <input type="checkbox" name="remember" id="remember">
+        <label  style="display: inline-block;" for="remember">ingat saya</label></li>
       <li>
         <button type="submit" name="login">login</button>
       </li>
