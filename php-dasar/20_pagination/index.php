@@ -8,14 +8,8 @@ if(!isset($_SESSION["login"])) {
   exit;
 }
 
-
-
 // ambil data dari tabel dabases (buah_buahan)
 
-// ketika tombol cari di klik
-if (isset($_POST["cari"])) {
-  $buah_buahan = cari($_POST["keyword"]);
-}
 
 $jmlDtPerhalaman = 3;
 $jmlData = count(ambil_tabel("SELECT * FROM buah_buahan"));
@@ -24,8 +18,12 @@ $halamanAktiff = (isset($_GET['halaman'])) ? $_GET['halaman'] : 1;
 $awalData = ($jmlDtPerhalaman * $halamanAktiff) - $jmlDtPerhalaman;
 
 $buah_buahan = ambil_tabel("SELECT * FROM buah_buahan LIMIT $awalData, $jmlDtPerhalaman");
-?>
 
+// ketika tombol cari di klik
+if (isset($_POST["cari"])) {
+  $buah_buahan = cari($_POST["keyword"], $awalData, $jmlDtPerhalaman);
+}
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 

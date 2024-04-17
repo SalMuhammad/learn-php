@@ -166,7 +166,7 @@ function upload($lokasi_kembali) {
   return $namaFileUpload;
 }
 
-function cari($keyword) {
+function cari($keyword, $awalData, $jmlDtPerhalaman) {
   return ambil_tabel("SELECT * FROM buah_buahan 
                       WHERE
                         nama LIKE '%$keyword%' or 
@@ -174,7 +174,7 @@ function cari($keyword) {
                         asal_negara LIKE '%$keyword%' or 
                         tanda_matang LIKE '%$keyword%' or 
                         kebebasan_makan LIKE '%$keyword%' or 
-                        ditemukan_pada LIKE '%$keyword%'
+                        ditemukan_pada LIKE '%$keyword%' LIMIT $awalData, $jmlDtPerhalaman
                     ");
 }
 
