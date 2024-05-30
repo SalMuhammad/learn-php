@@ -7,3 +7,10 @@ let loadFile = function(event) {
     URL.revokeObjectURL(gambar.src)
   }
 }
+
+console.log(['nasi', 'on']);
+let makanan = ['nasi', 'ayam', 'ikan', 'sayur'];
+makanan.forEach(function(item) {
+  console.log(item);
+})
+

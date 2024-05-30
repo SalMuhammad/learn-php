@@ -6,6 +6,8 @@ if(!isset($_SESSION["login"])) {
   header("Location: login.php");
   exit;
 }
+
+
 if (isset($_POST["submit"])) {
   // var_dump($_POST);
   if (tambah1($_POST) > 0) {
@@ -18,7 +20,7 @@ if (isset($_POST["submit"])) {
   } else {
     echo "
       <script>
-        alert('data gagal simpan')
+        alert('data gagal simpan__')
         // document.location.href = 'index.php'
       </script>
     ";

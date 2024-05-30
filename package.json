@@ -1,0 +1,21 @@
+{
+  "name": "exit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ".;s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "f"
+  },
+  "keywords": [
+    "exit"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "php": "^1.0.2"
+  }
+}

@@ -1,11 +1,11 @@
 <?php 
 require 'functions.php';
 
-session_start();
-if(!isset($_SESSION["login"])) {
-  header("Location: login.php");
-  exit;
-}
+// session_start();
+// if(!isset($_SESSION["login"])) {
+//   header("Location: login.php");
+//   exit;
+// }
 
 if(isset($_POST["register"])) {
   if(registrasi($_POST) > 0) {

@@ -1,0 +1,2 @@
+cara menglear otomatis setiap menjalankan (run) php di codeRun
+tayakan ke kopilot: kode apa yang biasa di gunakan di git bash
